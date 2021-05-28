@@ -1,6 +1,6 @@
-node_count                = "4"         # No Of VM's to create
-vm_name                   = "WEUWVM"        # VM Name
-app                       = "ABC"       # Worload Name
+node_count                = "1"         # No Of VM's to create
+vm_name                   = "VMNAME"        # VM Name
+app                       = "WORKLOAD"      # Worload Name
 zones                     = [1,2,3]         # Min 1 & Max 3, Example : zones= [1] / [1,2] / [1,2,3]
 
 public_ip_required        = "false"
@@ -12,7 +12,7 @@ ddisk_mount_required      = "false"
 enable_accelerated_nw     = "false"
 ip_type                   = "Dynamic"   # [Dynamic / Static]
 ip_addr                   = ""          # [In case of ip_type = Static Provide IP Address ]
-os_cs_img_required        = "false"
+os_cs_img_required        = "false"     # True for CUstom Image else Marketplace Image
 win_license_type          = ""	        # [Blank Value("") for Not Using Hybrid Benefit / Windows_Server for Win 2016/2019 DC / Windows_Client for Win 10]
 
 vm_sku_type = "Standard_B1ms" # VM SKU Model which is available in WEU region
@@ -21,19 +21,19 @@ osdisk_size = ""              # OS Disk-Size in GB [32, 128, 256, 1024]
 mddisk_type = ""              # Data Disk-Type Premium_LRS / Standard_LRS
 mddisk_size = ""              # Data Disk-Size in GB [8, 16, 32, 64, 128, 256, 512, 1024]
 
-vm_rg_name    = "abc-vm-rg" # VM RG Name
+vm_rg_name    = "vm-rg" # VM RG Name
 
 nw_rg_name  = "network-rg"       # N/W resourceGroup Name
 vnet_name   = "tungamalli-vnet"  # N/W VNet Name
-subnet_name = "ABCCorpSubnet01"  # Sub Net Name
+subnet_name = "Subnet01"  # Sub Net Name
 
 keyvault_rg_name = "keyvault-rg"      # Key Vault resourceGroup
 keyvault_name    = "diskencry-kv"     # Key Vault Name
 key_name         = "DiskEncKey"       # Key Name
 
-diag_storage_name = "https://weubootdaigsa01.blob.core.windows.net/" # For Boot Diagnostics
+diag_storage_name = "https://storageaccount.blob.core.windows.net/" # For Boot Diagnostics
 
-os_cs_img_id = ""
+os_cs_img_id = ""   # Azure Shared Image Gallery Image ResourceID
 os_mk_img_publisher   = "MicrosoftWindowsServer"
 os_mk_img_offer       = "WindowsServer"
 os_mk_img_sku         = "2019-Datacenter"

@@ -104,7 +104,7 @@ Provisions an a Windows 2019 Datacenter Server VM.
 - Public IP addresses (one for each VM)
 - Public IP Addresses allocation method is Static and SKU is Standard
 - Using port 3389 for RDP access using the password as shown
-- "nb_of_data_disk" Number of the data disks attached to each virtual machine
+- `var.nb_of_ddisk` Number of the data disks attached to each virtual machine
 
 #### Quick Run
 
@@ -121,7 +121,7 @@ terraform apply
 
 ## Author
 
-Originally created by [Tunga Malli](http://github.com/tungamalli-azure)
+created by [Tunga Malli](http://github.com/tungamalli-azure)
 
 ## License
 

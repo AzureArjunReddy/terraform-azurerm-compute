@@ -34,9 +34,9 @@ terraform {
   }
 }
 //------------------------------------------------------------
-node_count                = "4"         # No Of VM's to create
-vm_name                   = "WEUWVM"    # VM Name
-app                       = "ABC"       # Workload Name
+node_count                = "1"         # No Of VM's to create
+vm_name                   = "VMNAME"    # VM Name
+app                       = "WORKLOAD"  # Workload Name
 zones                     = [1,2,3]     # [1] / [1,2] / [1,2,3]
 location_name             = "westeurope"  # Azure Region Location
 public_ip_required        = "false"
@@ -118,7 +118,7 @@ terraform apply
 
 ## Author
 
-created by [Tunga Malli](http://github.com/tungamalli-azure)
+created by [Tunga Mallikarjuna Reddy](http://github.com/tungamalli-azure)
 
 ## License
 

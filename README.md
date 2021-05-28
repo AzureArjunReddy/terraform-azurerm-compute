@@ -107,7 +107,7 @@ Provisions an a Windows 2019 Datacenter Server VM.
 
 Using Azure CLI:
 
-```sh
+```bash
 git clone https://github.com/tungamalli-azure/terraform-azurerm-compute.git
 cd terraform-azurerm-compute/win-vm
 terraform init

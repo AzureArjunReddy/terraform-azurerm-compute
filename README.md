@@ -20,7 +20,7 @@ This Terraform deploys Virtual Machines in Azure with the following characterist
 
 **> Note: Pre requisites to create a VM. 1) VM resourceGroup 2) Storage Account 3) Virtual Network 4) Subnet 5) Network Security Group (NSG)**
 
-## Usage in Terraform 0.15
+## Usage in Terraform 0.15.4
 ```hcl
 provider "azurerm" {
   features {}

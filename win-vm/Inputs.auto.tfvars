@@ -1,43 +1,24 @@
-node_count                = "1"         # No Of VM's to create
-vm_name                   = "VMNAME"        # VM Name
-app                       = "WORKLOAD"      # Worload Name
-zones                     = [1,2,3]         # Min 1 & Max 3, Example : zones= [1] / [1,2] / [1,2,3]
+vm_name     = "WINVM123345"
+vm_rg_name  = "common-rg"
+nw_rg_name  = "network-rg"
+vnet_name   = "corp-vnet-01"
+subnet_name = "WinSubnet01"
 
-public_ip_required        = "false"
-static_ip_required        = "true"
+location_name             = "westeurope"
 disk_encryption_required  = "false"
-data_disk_required        = "false"
-nb_of_ddisk               = "0"
+nbof_data_disk            = "1"
 ddisk_mount_required      = "false"
-enable_accelerated_nw     = "false"
-ip_type                   = "Dynamic"   # [Dynamic / Static]
-ip_addr                   = ""          # [In case of ip_type = Static Provide IP Address ]
-os_cs_img_required        = "false"     # True for CUstom Image else Marketplace Image
-win_license_type          = ""	        # [Blank Value("") for Not Using Hybrid Benefit / Windows_Server for Win 2016/2019 DC / Windows_Client for Win 10]
 
-vm_sku_type = "Standard_B1ms" # VM SKU Model which is available in WEU region
-osdisk_type = "Standard_LRS"  # OS Disk-Type Premium_LRS / Standard_LRS
-osdisk_size = ""              # OS Disk-Size in GB [32, 128, 256, 1024]
-mddisk_type = ""              # Data Disk-Type Premium_LRS / Standard_LRS
-mddisk_size = ""              # Data Disk-Size in GB [8, 16, 32, 64, 128, 256, 512, 1024]
+vm_sku_type = "Standard_D2S_V3"
+osdisk_type = "Premium_LRS"
+mddisk_type = "Premium_LRS"
+mddisk_size = "16"
 
-vm_rg_name    = "vm-rg" # VM RG Name
+keyvault_rg_name = "keyvault-rg"
+keyvault_name    = "weuskv01"
+key_name         = "WinVMKvKek01"
 
-nw_rg_name  = "network-rg"       # N/W resourceGroup Name
-vnet_name   = "tungamalli-vnet"  # N/W VNet Name
-subnet_name = "Subnet01"  # Sub Net Name
-
-keyvault_rg_name = "keyvault-rg"      # Key Vault resourceGroup
-keyvault_name    = "diskencry-kv"     # Key Vault Name
-key_name         = "DiskEncKey"       # Key Name
-
-diag_storage_name = "https://storageaccount.blob.core.windows.net/" # For Boot Diagnostics
-
-os_cs_img_id = ""   # Azure Shared Image Gallery Image ResourceID
-os_mk_img_publisher   = "MicrosoftWindowsServer"
-os_mk_img_offer       = "WindowsServer"
-os_mk_img_sku         = "2019-Datacenter"
-os_mk_img_version     = "latest"
+diag_storage_name = "https://vmbootdaigsa01.blob.core.windows.net/"
 
 tags = {  
   "CostCenter"    = "Personal"
@@ -45,14 +26,3 @@ tags = {
   "Maintainer"    = "Tunga Malli"
   "Power Off"     = "Y"
 }
-//---------------------------------------------------------------------------------
-vm_username    = "dummyadmin"       # User Name
-vm_password    = "5^&*()tYUIOP"     # User Password
-
-location_name           = "westeurope"              # Azure Region Location
-delete_os_disk          = "true"                    # Delete Disk [ ture / false ]
-delete_data_disks       = "true"                    # Delete Disk [ ture / false ]
-nw_watcher_required     = "false"
-enable_log_analytics    = "false"
-nwwType  = "NetworkWatcherAgentWindows"
-agntType = "MicrosoftMonitoringAgent"

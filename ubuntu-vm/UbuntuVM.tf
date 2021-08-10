@@ -1,0 +1,91 @@
+###############################################################################
+# Developed by Tunga Mallikarjuna Reddy
+###############################################################################
+
+# Generate random text for a unique Public IP name
+resource "random_id" "randomId" {
+    byte_length = 2
+}
+# Read and Load Vnet Info
+data "azurerm_virtual_network" "vnet" {
+  name                = var.vnet_name
+  resource_group_name = var.nw_rg_name
+}
+# Read and Load Subnet Info
+data "azurerm_subnet" "subnet" {
+  name                 = var.subnet_name
+  virtual_network_name = data.azurerm_virtual_network.vnet.name
+  resource_group_name  = var.nw_rg_name
+}
+# Create public IPs
+resource "azurerm_public_ip" "public_ip" {
+    name                         = "Arjun${random_id.randomId.hex}"
+    location                     = var.location_name
+    resource_group_name          = var.vm_rg_name
+    allocation_method            = "Dynamic"
+
+    tags = {
+        environment = "MSFT Reactor"
+    }
+}
+# Create network interface
+resource "azurerm_network_interface" "private_nic" {
+  name                = "${var.vm_name}-nic01"  
+  location            = var.location_name
+  resource_group_name = var.vm_rg_name
+
+  ip_configuration {
+    name                          = "${var.vm_name}-ip1"
+    subnet_id                     = data.azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"    
+    public_ip_address_id          = azurerm_public_ip.public_ip.id
+  }
+  tags = {
+        environment = "MSFT Reactor"
+  }
+}
+
+# Create Virtual Machine with RedHat MarketPlace Image
+resource "azurerm_virtual_machine" "vm" {  
+  name                  = var.vm_name
+  location              = var.location_name  
+  resource_group_name   = var.vm_rg_name
+  network_interface_ids = [azurerm_network_interface.private_nic.id]
+  vm_size               = var.vm_sku_type
+
+  storage_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
+  storage_os_disk {
+    name              = "${var.vm_name}-osdisk"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = var.osdisk_type    
+  }
+  dynamic storage_data_disk {
+    for_each = range(var.nbof_data_disk)
+    content {
+      name              = "${var.vm_name}-ddisk0${storage_data_disk.value +1}"      
+      create_option     = "Empty"
+      lun               = storage_data_disk.value
+      disk_size_gb      = var.mddisk_size
+      managed_disk_type = var.mddisk_type      
+    }
+  }  
+  os_profile {
+    computer_name  = var.vm_name
+    admin_username = "rheladmin"
+    admin_password = "Passw0rd!123"
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+  boot_diagnostics {
+      enabled     = "true"
+      storage_uri = var.diag_storage_name
+  }
+  tags = var.tags
+}

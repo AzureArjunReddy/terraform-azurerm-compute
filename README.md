@@ -20,7 +20,7 @@ This Terraform deploys Virtual Machines in Azure with the following characterist
 
 **> Note: Pre requisites to create a VM. 1) VM resourceGroup 2) Storage Account 3) Virtual Network 4) Subnet 5) Network Security Group (NSG)**
 
-## Usage in Terraform 0.15.4
+## Usage in Terraform 1.0.4
 ```hcl
 provider "azurerm" {
   features {}
@@ -108,7 +108,7 @@ Provisions an a Windows 2019 Datacenter Server VM.
 Using Azure CLI:
 
 ```bash
-git clone https://github.com/tungamalli-azure/terraform-azurerm-compute.git
+git clone https://github.com/AzureArjunReddy/terraform-azurerm-compute.git
 cd terraform-azurerm-compute/win-vm
 terraform init
 terraform validate
@@ -118,7 +118,7 @@ terraform apply
 
 ## Author
 
-created by [Tunga Mallikarjuna Reddy](http://github.com/tungamalli-azure)
+created by [Tunga Mallikarjuna Reddy](https://github.com/AzureArjunReddy)
 
 ## License
 

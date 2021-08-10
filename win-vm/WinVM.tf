@@ -17,18 +17,6 @@ data "azurerm_subnet" "subnet" {
   virtual_network_name = data.azurerm_virtual_network.vnet.name
   resource_group_name  = var.nw_rg_name
 }
-# Read and Load Keyvault Info
-data "azurerm_key_vault" "kv" {
-  count               = var.disk_encryption_required ? 1 :0
-  name                = var.keyvault_name
-  resource_group_name = var.keyvault_rg_name
-}
-# Read and Load Keyvault KeK Info
-data "azurerm_key_vault_key" "key" {
-  count               = var.disk_encryption_required ? 1 :0
-  name                = var.key_name
-  key_vault_id        = data.azurerm_key_vault.kv[0].id
-}
 # Create public IPs
 resource "azurerm_public_ip" "public_ip" {
     name                         = "Arjun${random_id.randomId.hex}"
